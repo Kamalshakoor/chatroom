@@ -1,22 +1,24 @@
-<%= form_with(model: room) do |form| %>
-  <% if room.errors.any? %>
+<%= form_with(model: room) do |form|%>
+<% if room.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+        <h2><%= pluralize(room.errors.count, "error") %>
+            prohibited this room from being saved:</h2>
 
-      <ul>
-        <% room.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+            <% room.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
     </div>
-  <% end %>
+<% end %>
 
-  <div class="field">
+<div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <%= form.text_field :name ,class:'form-control', placeholder:'Room name....' %>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+    <%= form.submit 'Create Room', class:"form-control mt-3 btn btn-outline-success"
+    %>
+</div>
 <% end %>
