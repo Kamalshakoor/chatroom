@@ -23,16 +23,19 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.user = current_user
-   
-      if @message.save
+    @message.save
+    SendMessageJob.perform_later(@message)
 
-        redirect_to request.referrer
+   
+      # if @message.save
+
+      #   redirect_to request.referrer
         # format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
         # format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+      # else
+      #   format.html { render :new, status: :unprocessable_entity }
+      #   format.json { render json: @message.errors, status: :unprocessable_entity }
+      # end
   end
 
   # PATCH/PUT /messages/1 or /messages/1.json

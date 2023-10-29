@@ -17,12 +17,11 @@
             <% if @room.present? %>
                 <h3 class='mb-3 text-center mt-3'><%= @room.name %></h3>
                 <hr />
-                <% @room.messages.each do |msg| %>
-                    <div class='user-text'>
-                        <p class="messagebox px-3 py-2 <%= 'me' if msg.user == current_user %> "><%= msg.content %> </p> 
-                        <p class="username text-success <%= 'te' if msg.user == current_user %>"> <%= msg.user.username%></p>
-                    </div> <br />
-                <% end %>
+                <div id='messages'>
+                    <% @room.messages.each do |msg| %>
+                        <%= render partial: 'messages/message', locals: { msg: msg } %>                
+                    <% end %>
+                </div>
                 <div class='chat-box'>
                     <%= render 'messages/form', message: Message.new, room: @room %>
                 </div>
