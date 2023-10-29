@@ -1,0 +1,25 @@
+.chat-room{
+    height: 95vh;
+    overflow-y: scroll;
+    padding-bottom: 10px;
+}
+.messagebox{
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #f8f9fa;
+}
+.user-text{
+    margin-bottom:10px;
+}
+.username{
+    font-size: 0.8rem;
+    margin-left: 2%;
+}
+.me{
+    float: right;
+    background-color: rgb(101, 101, 233);
+    color: white;
+}
+.te{
+    margin-left: 87%;
+}

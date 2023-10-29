@@ -1,6 +1,5 @@
-<div class="container mt-5">
+<div class="container">
     <div class="row g-2">
-
         <div class="col-md-4">
             <div class=' shadow p-md-3'>
                 <%= render 'form', room:Room.new %>
@@ -14,13 +13,17 @@
                 <% end %>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 chat-room shadow border">
             <% if @room.present? %>
-                <h3 class='mb-3'><%= @room.name %></h3>
+                <h3 class='mb-3 text-center mt-3'><%= @room.name %></h3>
+                <hr />
                 <% @room.messages.each do |msg| %>
-                    <p><%= msg.content %></p>
+                    <div class='user-text'>
+                        <p class="messagebox px-3 py-2 <%= 'me' if msg.user == current_user %> "><%= msg.content %> </p> 
+                        <p class="username text-success <%= 'te' if msg.user == current_user %>"> <%= msg.user.username%></p>
+                    </div> <br />
                 <% end %>
-                <div class='chat-room'>
+                <div class='chat-box'>
                     <%= render 'messages/form', message: Message.new, room: @room %>
                 </div>
             <% end %>
