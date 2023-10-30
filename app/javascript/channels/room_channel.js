@@ -1,20 +1,37 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create({channel: "RoomChannel",room_id: 3},
- {
-  connected() {
-    // Called when the subscription is ready for use on the server
-    console.log('connected...')
-  },
+document.addEventListener('turbolinks:load', () => {
+  const room_element = document.getElementById('room-id');
+  const room_id = room_element.getAttribute('data-room-id');
 
-  disconnected() {
-    // Called when the subscription has been terminated by the server
-  },
+  console.log(consumer.subscriptions)
 
-  received(data) {
+  consumer.subscriptions.subscriptions.forEach((subscription) => {
+    consumer.subscriptions.remove(subscription)
+  })
+
+  consumer.subscriptions.create({ channel: "RoomChannel", room_id: room_id }, {
+    connected() {
+      console.log("connected to " + room_id)
+      // Called when the subscription is ready for use on the server
+    },
+
+    disconnected() {
+      // Called when the subscription has been terminated by the server
+    },
+
+    received(data) {
+      // debugger
+      const user_element = document.getElementById('user-id');
+      const user_id = Number(user_element.getAttribute('data-user-id'));
     // Called when there's incoming data on the websocket for this channel
-    console.log(data)
-    const messageContainer = document.getElementById('messages')
-    messageContainer.innerHTML = messageContainer.innerHTML + data.html
+      const messageContainer = document.getElementById('messages')
+      messageContainer.innerHTML = messageContainer.innerHTML + data.html
+      // Clear the input field and enable the submit button
+      const inputField = document.getElementById('messageInput');
+      const submitButton = document.querySelector('.submit');
+      inputField.value = '';
+      submitButton.removeAttribute('disabled');
   }
 });
+})

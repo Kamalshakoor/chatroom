@@ -23,3 +23,20 @@
 .te{
     margin-left: 87%;
 }
+
+.roombox{
+    background-color: rgb(24, 21, 21);
+    text-align: center;
+    border-radius: 10px;
+}
+.roombox p{
+    color: white;
+    font-weight: bolder;
+}
+.active{
+    background-color: azure;
+    border-radius: 10px;
+}
+.active p{
+    color: black;
+}

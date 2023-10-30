@@ -1,3 +1,5 @@
+<div id="room-id" data-room-id="<%= @room.try(:id) %>"></div>
+<div id="user-id" data-user-id="<%= current_user.id %>"></div>
 <div class="container">
     <div class="row g-2">
         <div class="col-md-4">
@@ -8,8 +10,12 @@
             <div>
                 <h1>Rooms</h1>
                 <% @rooms.each do |room| %>
-                    <h3 class="px-3 py-2 border shadow rooms"><%= link_to room.name ,
-                        room_path(room),class:'text-decoration-none text-success' %></h3>
+                    <% active_class = (@room == room) ? 'active' : ''%>
+                    <div class="px-3 py-2 border shadow roombox <%= active_class %> ">
+                        <h3 class="rooms"><%= link_to room.name ,
+                            room_path(room),class:'text-decoration-none text-success' %></h3>
+                        <p><%= room.users.uniq.count %></p> 
+                    </div> <br />
                 <% end %>
             </div>
         </div>
